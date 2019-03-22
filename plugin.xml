@@ -1,0 +1,32 @@
+<?xml version='1.0' encoding='utf-8'?>
+<plugin id="cordova-plugin-android-fcm" version="0.0.1" 
+    xmlns="http://apache.org/cordova/ns/plugins/1.0" 
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <name>AndroidFcmPlugin</name>
+    <js-module name="AndroidFcmPlugin" src="www/AndroidFcmPlugin.js">
+        <clobbers target="androidfcm" />
+    </js-module>
+    <platform name="android">
+        <config-file parent="/*" target="res/xml/config.xml">
+            <feature name="AndroidFcmPlugin">
+                <param name="android-package" value="com.androidfcm.cordova.AndroidFcmPlugin" />
+            </feature>
+        </config-file>
+        <config-file target="AndroidManifest.xml" parent="/manifest">
+            <uses-permission android:name="android.permission.INTERNET" />
+        </config-file>
+        <config-file target="AndroidManifest.xml" parent="/manifest/application">
+            <service android:name="com.androidfcm.cordova.CustomFirebaseMessagingService">
+                <intent-filter>
+                    <action android:name="com.google.firebase.MESSAGING_EVENT" />
+                </intent-filter>
+            </service>
+        </config-file>
+        <source-file src="src/android/AndroidFcmPlugin.java" target-dir="src/com/androidfcm/cordova/AndroidFcmPlugin" />
+        <source-file src="src/android/CustomFirebaseMessagingService.java" target-dir="src/com/androidfcm/cordova/CustomFirebaseMessagingService" />
+
+        <framework src="src/android/AndroidFcmPlugin.gradle" custom="true" type="gradleReference"/>
+
+        <hook src="hooks/android_after_prepare.js" type="after_prepare" />
+    </platform>
+</plugin>

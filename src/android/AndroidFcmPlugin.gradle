@@ -1,0 +1,26 @@
+buildscript {
+    repositories {
+        google()
+        jcenter()
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:3.1.0'
+        classpath 'com.google.gms:google-services:4.1.0'
+    }
+}
+
+allprojects {
+    repositories {
+        google()
+        jcenter()
+    }
+}
+
+dependencies {
+	implementation 'com.google.firebase:firebase-messaging:+'
+}
+
+//apply plugin: 'com.google.gms.google-services'
+ext.postBuildExtras = {
+    apply plugin: com.google.gms.googleservices.GoogleServicesPlugin
+}

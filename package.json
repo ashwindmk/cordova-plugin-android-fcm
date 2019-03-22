@@ -1,0 +1,17 @@
+{
+  "name": "cordova-plugin-android-fcm",
+  "version": "0.0.1",
+  "description": "Cordova plugin for Android FCM service.",
+  "cordova": {
+    "id": "cordova-plugin-android-fcm",
+    "platforms": [
+      "android"
+    ]
+  },
+  "keywords": [
+    "ecosystem:cordova",
+    "cordova-android"
+  ],
+  "author": "Ashwin Dinesh",
+  "license": "ISC"
+}
