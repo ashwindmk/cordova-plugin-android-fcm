@@ -24,16 +24,34 @@ public class AndroidFcmPlugin extends CordovaPlugin {
     @Override
     public void initialize(CordovaInterface cordova, CordovaWebView webView) {
         super.initialize(cordova, webView);
-        Log.i(TAG, "intialized successfully");
     }
 
     @Override
     public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
-        if (action.equals("getToken")) {
+        if ("updateToken".equals(action)) {
+            this.updateToken();
+            return true;
+        } else if ("getToken".equals(action)) {
             this.getToken(callbackContext);
             return true;
         }
         return false;
+    }
+
+    private void updateToken() {
+        if (CustomFirebaseMessagingService.includesWebEngage()) {
+            FirebaseInstanceId.getInstance().getInstanceId().addOnSuccessListener(new OnSuccessListener<InstanceIdResult>() {
+                @Override
+                public void onSuccess(InstanceIdResult instanceIdResult) {
+                    try {
+                        String token = instanceIdResult.getToken();
+                        // Update FCM token here
+                    } catch (Throwable t) {
+                        Log.e(TAG, "FCM token error", t);
+                    }
+                }
+            });
+        }
     }
 
     private void getToken(CallbackContext callbackContext) {
@@ -43,11 +61,9 @@ public class AndroidFcmPlugin extends CordovaPlugin {
                 public void onSuccess(InstanceIdResult instanceIdResult) {
                     try {
                         String token = instanceIdResult.getToken();
-                        Log.i(TAG, "fcm token: " + token);
                         callbackContext.success(token);
                     } catch (Throwable t) {
-                        Log.e(TAG, "fcm token error");
-                        callbackContext.error("Error while getting token");
+                        callbackContext.error(t.getMessage());
                     }
                 }
             });

@@ -1,12 +1,16 @@
 {
   "name": "cordova-plugin-android-fcm",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Cordova plugin for Android FCM service.",
   "cordova": {
     "id": "cordova-plugin-android-fcm",
     "platforms": [
       "android"
     ]
+  },
+  "repository": {
+    "type" : "git",
+    "url" : "https://github.com/ashwindmk/cordova-plugin-android-fcm.git"
   },
   "keywords": [
     "ecosystem:cordova",
