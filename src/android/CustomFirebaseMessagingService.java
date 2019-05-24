@@ -8,7 +8,7 @@ import java.util.Map;
 public class CustomFirebaseMessagingService extends FirebaseMessagingService {
     private static final String TAG = "custom-fcm-service";
 
-    private boolean includesWebEngage() {
+    static boolean includesWebEngage() {
         try {
             Class.forName("com.webengage.sdk.android.WebEngage");
             return true;
@@ -22,8 +22,6 @@ public class CustomFirebaseMessagingService extends FirebaseMessagingService {
 
     @Override
     public void onMessageReceived(RemoteMessage remoteMessage) {
-        Log.i(TAG, "fcm message received");
-
         // Add your custom native code here
         Map<String, String> data = remoteMessage.getData();
         if (data != null) {
@@ -39,7 +37,6 @@ public class CustomFirebaseMessagingService extends FirebaseMessagingService {
     @Override
     public void onNewToken(String s) {
         super.onNewToken(s);
-        Log.i(TAG, "new fcm token: " + s);
 
         // Send token to server
         if (includesWebEngage()) {

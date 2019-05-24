@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<plugin id="cordova-plugin-android-fcm" version="0.0.1" 
+<plugin id="cordova-plugin-android-fcm" version="0.0.2" 
     xmlns="http://apache.org/cordova/ns/plugins/1.0" 
     xmlns:android="http://schemas.android.com/apk/res/android">
     <name>AndroidFcmPlugin</name>
@@ -22,8 +22,9 @@
                 </intent-filter>
             </service>
         </config-file>
-        <source-file src="src/android/AndroidFcmPlugin.java" target-dir="src/com/androidfcm/cordova/AndroidFcmPlugin" />
-        <source-file src="src/android/CustomFirebaseMessagingService.java" target-dir="src/com/androidfcm/cordova/CustomFirebaseMessagingService" />
+
+        <source-file src="src/android/AndroidFcmPlugin.java" target-dir="src/com/androidfcm/cordova/" />
+        <source-file src="src/android/CustomFirebaseMessagingService.java" target-dir="src/com/androidfcm/cordova/" />
 
         <framework src="src/android/AndroidFcmPlugin.gradle" custom="true" type="gradleReference"/>
 
