@@ -10,12 +10,12 @@
   },
   "repository": {
     "type" : "git",
-    "url" : "https://github.com/WebEngage/cordova-plugin-android-fcm.git"
+    "url" : "https://github.com/WebEngage/cordova-plugin-android-fcm/tree/feature/capSupport.git"
   },
   "keywords": [
     "ecosystem:cordova",
     "cordova-android"
   ],
-  "author": "Ashwin Dinesh",
+  "author": "WebEngage",
   "license": "ISC"
 }
