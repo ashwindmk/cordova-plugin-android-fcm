@@ -32,34 +32,44 @@ public class AndroidFcmPlugin extends CordovaPlugin {
 
     private void updateToken() {
         if (CustomFirebaseMessagingService.includesWebEngage()) {
-            FirebaseInstanceId.getInstance().getInstanceId().addOnSuccessListener(new OnSuccessListener<InstanceIdResult>() {
-                @Override
-                public void onSuccess(InstanceIdResult instanceIdResult) {
-                    try {
-                        String token = instanceIdResult.getToken();
-                        com.webengage.sdk.android.Logger.d(TAG, "Updating WebEngage FCM token: " + token);
-                        com.webengage.sdk.android.WebEngage.get().setRegistrationID(token);
-                    } catch (Throwable t) {
-                        com.webengage.sdk.android.Logger.e(TAG, "FCM token error", t);
-                    }
-                }
-            });
+               FirebaseMessaging.getInstance().getToken().addOnCompleteListener(new OnCompleteListener<String>() {
+                           @Override
+                           public void onComplete(@NonNull Task<String> task) {
+                                           try {
+                                               String token = task.getResult();
+                                               com.webengage.sdk.android.Logger.d(TAG, "Updating WebEngage FCM token: " + token);
+                                               com.webengage.sdk.android.WebEngage.get().setRegistrationID(token);
+                                           } catch (Exception e) {
+                                                 com.webengage.sdk.android.Logger.e(TAG, "FCM token error", e);
+                                           }
+                                       }
+                                   });
+
+
             }
     }
 
+
     private void getToken(CallbackContext callbackContext) {
         if (callbackContext != null) {
-            FirebaseInstanceId.getInstance().getInstanceId().addOnSuccessListener(new OnSuccessListener<InstanceIdResult>() {
-                @Override
-                public void onSuccess(InstanceIdResult instanceIdResult) {
-                    try {
-                        String token = instanceIdResult.getToken();
-                        callbackContext.success(token);
-                    } catch (Throwable t) {
-                        callbackContext.error(t.getMessage());
-                    }
-                }
-            });
+
+                FirebaseMessaging.getInstance().getToken().addOnCompleteListener(new OnCompleteListener<String>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<String> task) {
+                                            try {
+                                                String token = task.getResult();
+                                                 try {
+                                                                         String token = instanceIdResult.getToken();
+                                                                         callbackContext.success(token);
+                                                                     } catch (Throwable t) {
+                                                                         callbackContext.error(t.getMessage());
+                                                                     }
+                                            } catch (Exception e) {
+                                    com.webengage.sdk.android.Logger.e(TAG, "FCM token error", e);
+                                            }
+                                        }
+                                    });
+
         }
     }
 }
