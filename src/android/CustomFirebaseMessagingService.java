@@ -37,7 +37,6 @@ public class CustomFirebaseMessagingService extends FirebaseMessagingService {
     @Override
     public void onNewToken(String s) {
         super.onNewToken(s);
-
         // Send token to server
         if (includesWebEngage()) {
             com.webengage.sdk.android.WebEngage.get().setRegistrationID(s);

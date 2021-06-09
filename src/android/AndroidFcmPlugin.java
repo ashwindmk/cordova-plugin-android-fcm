@@ -8,11 +8,10 @@ import org.apache.cordova.CordovaWebView;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.iid.FirebaseInstanceId;
-import com.google.firebase.iid.InstanceIdResult;
-
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.messaging.FirebaseMessaging;
+import com.webengage.sdk.android.WebEngage;
 /**
  * This class echoes a string called from JavaScript.
  */
@@ -45,7 +44,7 @@ public class AndroidFcmPlugin extends CordovaPlugin {
                     }
                 }
             });
-        }
+            }
     }
 
     private void getToken(CallbackContext callbackContext) {
