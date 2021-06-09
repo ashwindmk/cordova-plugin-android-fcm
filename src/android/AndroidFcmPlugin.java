@@ -59,7 +59,6 @@ public class AndroidFcmPlugin extends CordovaPlugin {
                                             try {
                                                 String token = task.getResult();
                                                  try {
-                                                                         String token = instanceIdResult.getToken();
                                                                          callbackContext.success(token);
                                                                      } catch (Throwable t) {
                                                                          callbackContext.error(t.getMessage());
